@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nichacker.github.io/sitemap.xml
