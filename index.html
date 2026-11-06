@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicholas Ong Zi Tao · SuperNix 个人主页</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M6 22 L16 8 L26 22 Z' fill='none' stroke='%2322d3ee' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='22' r='2.6' fill='%23fbbf24'/%3E%3C/svg%3E">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0a0e14;
+    --surface:#111a26;
+    --surface2:#0e1520;
+    --line:#1e2a3a;
+    --cyan:#22d3ee;
+    --amber:#fbbf24;
+    --ink:#e6edf3;
+    --muted:#8fa3b8;
+    --dim:#5d7288;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC","Segoe UI",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+
+  /* ===== 顶部导航 ===== */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,14,20,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-brand{font-weight:800;letter-spacing:.5px;color:var(--ink);font-size:15px}
+  .nav-brand em{font-style:normal;color:var(--cyan)}
+  .nav-links{display:none;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  @media (min-width:768px){.nav-links{display:flex}}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;overflow:hidden;padding:96px 0 84px;background:
+    radial-gradient(1000px 500px at 15% -10%,rgba(34,211,238,.12),transparent 60%),
+    radial-gradient(900px 480px at 95% 10%,rgba(251,191,36,.08),transparent 55%),
+    linear-gradient(180deg,#0b1119 0%,#0a0e14 100%)}
+  .hero-grid{position:absolute;inset:0;opacity:.5}
+  .hero-grid svg{width:100%;height:100%;display:block}
+  .hero .wrap{position:relative;z-index:2}
+  .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--dim);letter-spacing:2px;margin-bottom:22px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--cyan)}
+  .hero-title{font-size:34px;line-height:1.15;font-weight:900;letter-spacing:.5px}
+  .hero-title .en{display:block;font-size:clamp(20px,5vw,30px);font-weight:800;color:var(--ink)}
+  .hero-names{margin-top:6px;font-size:15px;color:var(--muted)}
+  .hero-tagline{margin:18px 0 26px;font-size:17px;color:var(--cyan);font-weight:700}
+  .hero-desc{max-width:640px;color:var(--muted);font-size:15px}
+  .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+  .badge svg{flex:none}
+  .badge.honor{border-color:rgba(251,191,36,.4);color:#fde68a}
+  @media (min-width:768px){
+    .hero{padding:130px 0 110px}
+    .hero-title{font-size:52px}
+    .hero-tagline{font-size:22px}
+  }
+
+  /* ===== 昼夜对比条 ===== */
+  .daynight{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:46px}
+  @media (min-width:640px){.daynight{grid-template-columns:1fr 1fr}}
+  .dn{position:relative;padding:22px 22px;background:var(--surface2)}
+  .dn.day{background:linear-gradient(135deg,#0f2030,#101827)}
+  .dn.night{background:linear-gradient(135deg,#141016,#13101f)}
+  .dn .t{font-size:13px;letter-spacing:2px;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .dn .t .dot{width:9px;height:9px;border-radius:50%}
+  .dn.day .t{color:#7dd3fc}.dn.day .t .dot{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  .dn.night .t{color:#fcd34d}.dn.night .t .dot{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  .dn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .dn li{font-size:14px;color:var(--muted);position:relative;padding-left:18px}
+  .dn li::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:2px}
+  .dn.day li::before{background:rgba(34,211,238,.7)}
+  .dn.night li::before{background:rgba(251,191,36,.7)}
+
+  /* ===== 区块标题 ===== */
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:30px}
+  .sec-no{font-size:13px;color:var(--cyan);letter-spacing:1px}
+  .sec-title{font-size:24px;font-weight:900;letter-spacing:.5px}
+  .sec-sub{font-size:14px;color:var(--dim);margin-top:6px;max-width:680px}
+  @media (min-width:768px){.sec-title{font-size:30px}}
+
+  /* ===== 故事 ===== */
+  .story{background:var(--surface2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .story-body{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 26px}
+  .story-body::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px;background:linear-gradient(var(--cyan),var(--amber))}
+  .story-body p{font-size:15px;color:#c9d6e2;margin-bottom:16px}
+  .story-body .punch{font-size:18px;font-weight:800;color:var(--ink);margin:20px 0 4px}
+  .story-body .golden{margin-top:24px;font-size:16px;color:var(--amber);font-weight:700}
+  @media (min-width:768px){.story-body{padding:40px 42px}.story-body p{font-size:16px}}
+
+  /* ===== 初心 ===== */
+  .why-quote{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 26px;position:relative}
+  .why-quote .mark{position:absolute;top:-14px;left:22px;width:28px;height:28px;border-radius:8px;background:var(--cyan);display:flex;align-items:center;justify-content:center}
+  .why-quote p{font-size:15px;color:#c9d6e2;margin-bottom:14px}
+  .why-quote .strong{color:var(--ink);font-weight:700}
+  .why-quote .belief{margin-top:18px;color:var(--amber);font-weight:700;font-size:16px}
+  @media (min-width:768px){.why-quote{padding:40px 42px}.why-quote p{font-size:16px}}
+
+  /* ===== 能力 ===== */
+  .skills{display:grid;grid-template-columns:1fr;gap:14px}
+  @media (min-width:640px){.skills{grid-template-columns:1fr 1fr}}
+  .skill{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .skill h3{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--ink);margin-bottom:12px}
+  .skill svg{flex:none;color:var(--cyan)}
+  .skill p{font-size:14px;color:var(--muted)}
+
+  /* ===== 认识我 tab ===== */
+  .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .tab{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+    font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .18s}
+  .tab:hover{color:var(--ink);border-color:var(--dim)}
+  .tab.on{background:var(--cyan);color:#07161d;border-color:var(--cyan);font-weight:700}
+  .pane{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .pane.on{display:block}
+  .pane .who{font-size:13px;color:var(--dim);letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .pane .who::before{content:"";width:22px;height:1px;background:var(--cyan)}
+  .pane p{font-size:15px;color:#c9d6e2}
+  .pane p b{color:var(--ink)}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:44px 0 56px;background:var(--surface2)}
+  .foot-note{font-size:15px;color:var(--muted);max-width:640px}
+  .foot-name{margin-top:14px;font-size:13px;color:var(--dim)}
+
+  /* 滚动锚点偏移 */
+  section[id]{scroll-margin-top:72px}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nicholas Ong Zi Tao",
+  "alternateName": ["SuperNix", "风仔"],
+  "jobTitle": "网络安全技术从业者",
+  "description": "马来西亚吉隆坡成长起来的网络安全与IT技术从业者，专注网络安全、Linux服务器运维、逆向工程与游戏技术研究。曾作为团队一员获BlackHat亚洲安全大会奖项。",
+  "address": { "@type": "PostalAddress", "addressCountry": "MY", "addressLocality": "吉隆坡" },
+  "award": "BlackHat 亚洲安全大会团队奖项",
+  "knowsAbout": ["网络安全", "Linux服务器运维", "逆向工程", "网络基础设施", "游戏技术研究与开发"],
+  "url": "https://nichacker.github.io/"
+}
+</script>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-brand">SuperNix<em>.</em></div>
+    <div class="nav-links">
+      <a href="#story">故事</a>
+      <a href="#why">初心</a>
+      <a href="#skills">能力</a>
+      <a href="#audience">认识我</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="hero-grid" aria-hidden="true">
+    <svg viewBox="0 0 1080 520" preserveAspectRatio="xMidYMid slice">
+      <g stroke="#1e2a3a" stroke-width="1" fill="none" opacity=".7">
+        <path d="M0 400 C 180 330, 320 430, 540 380 S 860 300, 1080 340"/>
+        <path d="M0 460 C 220 400, 420 500, 620 450 S 900 380, 1080 420"/>
+        <path d="M80 0 C 160 140, 120 300, 200 520"/>
+        <path d="M760 0 C 820 160, 760 300, 860 520"/>
+      </g>
+      <g fill="#22d3ee">
+        <circle cx="540" cy="380" r="3.2"/>
+        <circle cx="200" cy="420" r="2.4" opacity=".6"/>
+        <circle cx="860" cy="380" r="2.4" opacity=".6"/>
+      </g>
+      <g fill="#fbbf24">
+        <circle cx="300" cy="500" r="2.2" opacity=".8"/>
+        <circle cx="720" cy="330" r="2.2" opacity=".6"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">网络安全 · 逆向工程 · 服务器</div>
+    <h1 class="hero-title">Nicholas Ong Zi Tao</h1>
+    <div class="hero-names">网名 SuperNix ｜ 中文网名 风仔 ｜ 马来西亚 · 网络安全方向 · 技术从业者</div>
+    <div class="hero-tagline">白天不及格，深夜开挂。</div>
+    <p class="hero-desc">在马来西亚的教室里，他是经常不及格的普通学生；一到深夜，他化身拆解系统、钻研漏洞的技术狂人。搭起横跨吉隆坡到新加坡的服务器，拿下 BlackHat 亚洲团队奖。</p>
+    <div class="hero-badges">
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        网络安全方向
+      </span>
+      <span class="badge honor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.9 6.2 20l1.1-6.5L2.6 8.8l6.5-.9z"/></svg>
+        BlackHat 亚洲 · 团队奖项
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 昼夜对比 ===== -->
+<div class="wrap">
+  <div class="daynight">
+    <div class="dn day">
+      <div class="t"><span class="dot"></span>白天 · 教室</div>
+      <ul>
+        <li>考试经常不及格</li>
+        <li>早上记忆力弱、睡不好</li>
+        <li>成绩单上"及格"是稀罕事</li>
+      </ul>
+    </div>
+    <div class="dn night">
+      <div class="t"><span class="dot"></span>深夜 · 网络世界</div>
+      <ul>
+        <li>大脑真正启动，学习能力暴涨</li>
+        <li>对着服务器、逆向、漏洞疯狂钻研</li>
+        <li>越难越来劲，拆系统、调网络</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 故事 ===== -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">01 / STORY</span>
+      <h2 class="sec-title">我的故事</h2>
+    </div>
+    <div class="story-body">
+      <p>在马来西亚的教室里，我是那种考试经常不及格的学生——不是不努力，而是我的脑子只在晚上开机。早上记不住、睡不好、什么都考砸。</p>
+      <p>可一到深夜，黑暗降临，我的大脑才真正启动：兴奋、专注、学习能力暴涨。别人睡觉的时段，我对着服务器、逆向工程、网络安全疯狂钻研，越难越来劲。</p>
+      <p class="punch">白天不及格的少年，深夜是拆解系统的 SuperNix。</p>
+      <p>后来，我搭起横跨吉隆坡到新加坡的服务器，拿下 <b style="color:var(--amber)">BlackHat 亚洲团队奖</b>，从"差生"变成了网络安全领域让人记住的名字。</p>
+      <p class="golden">不是我不爱学习——我只是，天亮才睡着，天黑才清醒。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 初心 ===== -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">02 / WHY</span>
+      <h2 class="sec-title">我的初心</h2>
+      <div class="sec-sub">为什么做技术、做服务器、做《湾岸》——都是为了用户。</div>
+    </div>
+    <div class="why-quote">
+      <div class="mark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#07161d" stroke-width="2.4" stroke-linecap="round"><path d="M4 19V5M4 19h16M4 19h16"/></svg>
+      </div>
+      <p>我不是为了炫技而写代码，而是为了让东西更好用、让更多人用得起。</p>
+      <p><span class="strong">拿《湾岸》来说</span>——它原本是一台被锁在商场游戏厅里的街机，玩家要排队、要投币，还只能和本地人联机。我就想：为什么不能让玩家在家打开电脑就玩？为什么不能用更低成本、随时随地和全世界的人一起玩？</p>
+      <p>做开发，是为了用户：补上别人做不到的功能，把最好的体验带给每一个人。</p>
+      <p class="belief">我的信念，是一传十、十传百、百传千。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 能力 ===== -->
+<section id="skills" style="background:var(--surface2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">03 / SKILLS</span>
+      <h2 class="sec-title">我在做什么</h2>
+      <div class="sec-sub">把理论落到真实生产环境的工程能力。</div>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/></svg>
+          网络安全
+        </h3>
+        <p>系统与网络防护、威胁与漏洞应对；曾作为团队一员参与的项目获 BlackHat 亚洲安全大会奖项。</p>
+      </div>
+      <div class="skill">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="6" rx="2"/><path d="M6 8h.01M6 17h.01"/></svg>
+          服务器与集群
+        </h3>
+        <p>运维分布在吉隆坡、新加坡等地的 Ubuntu 服务器集群，负责系统部署、软件安装、监控与性能优化。</p>
+      </div>
+      <div class="skill">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+          网络与自动化
+        </h3>
+        <p>服务可用性监控、自动化告警、故障自愈与快速定位；规划软路由、内网访问、域名与端口管理。</p>
+      </div>
+      <div class="skill">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M8 6l-2 8M16 6l2 8"/></svg>
+          作品之一
+        </h3>
+        <p>面向《湾岸 Midnight》（Wangan Midnight 6RR+）游戏系列的技术研究与服务器开发项目。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 认识我 ===== -->
+<section id="audience">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">04 / WHO I AM TO YOU</span>
+      <h2 class="sec-title">不同人看到的我</h2>
+      <div class="sec-sub">老板、长辈、同龄人、合作伙伴——每个人看到我的不同面。点一下切换。</div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-pane="boss" role="tab">老板 / 招聘者</button>
+      <button class="tab" data-pane="elder" role="tab">家长 / 长辈</button>
+      <button class="tab" data-pane="peer" role="tab">同龄人 / 年轻人</button>
+      <button class="tab" data-pane="client" role="tab">客户 / 合作方</button>
+    </div>
+
+    <div class="pane on" data-pane="boss" role="tabpanel">
+      <div class="who">BOSS / 招聘者视角</div>
+      <p>SuperNix，马来西亚网络安全方向技术从业者，熟悉 <b>Linux 服务器运维、网络基础设施与自动化</b>，长期运维横跨吉隆坡—新加坡的 Ubuntu 服务器集群，能独立完成部署、监控、性能优化与故障自愈，曾获 <b>BlackHat 亚洲团队奖</b>，具备把理论落到生产环境的工程能力。</p>
+    </div>
+    <div class="pane" data-pane="elder" role="tabpanel">
+      <div class="who">FAMILY / 长辈视角</div>
+      <p>一个肯吃苦的年轻人。学生时代成绩不突出、常考不及格，但从未放弃——靠夜里加倍钻研自学网络安全、服务器与逆向工程，一路做到搭起跨国服务器、拿下 <b>BlackHat 亚洲团队奖</b>。他不是笨，只是比别人更晚发力。</p>
+    </div>
+    <div class="pane" data-pane="peer" role="tabpanel">
+      <div class="who">PEER / 同龄人视角</div>
+      <p>白天不及格，深夜开挂。马来西亚少年 SuperNix，一到晚上化身拆解系统的技术狂人——搭服务器、钻逆向、研究漏洞，还拿下 <b>BlackHat 亚洲团队奖</b>。别人在打游戏，他在拆游戏。</p>
+    </div>
+    <div class="pane" data-pane="client" role="tabpanel">
+      <div class="who">CLIENT / 合作方视角</div>
+      <p>SuperNix 提供：<b>Linux/Ubuntu 服务器部署与运维、网络与软路由配置、服务可用性监控与自动化告警、故障自愈与性能优化</b>，服务覆盖吉隆坡、新加坡多地节点，有真实生产环境经验。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <p class="foot-note">有些人白天发光，有些人，注定在黑夜点亮世界。</p>
+    <div class="foot-name">Nicholas Ong Zi Tao · SuperNix · 风仔 · 马来西亚</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab');
+  var panes=document.querySelectorAll('.pane');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      tabs.forEach(function(t){t.classList.remove('on');t.setAttribute('aria-selected','false');});
+      panes.forEach(function(p){p.classList.remove('on');});
+      tab.classList.add('on');
+      tab.setAttribute('aria-selected','true');
+      var key=tab.getAttribute('data-pane');
+      document.querySelector('.pane[data-pane="'+key+'"]').classList.add('on');
+    });
+  });
+})();
+</script>
+</body>
+</html>
